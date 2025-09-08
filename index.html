@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Cards</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #3A0CA3, #9D4EDD);
+      color: white;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .features, .pricing {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    .card h3 {
+      color: #3A0CA3;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #eee;
+    }
+    .cta {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 15px 30px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #3A0CA3, #9D4EDD);
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Digital Cards</h1>
+    <p>Your Smart Business Identity</p>
+    <a href="#pricing" class="cta">Get Your Card Now</a>
+  </header>
 
+  <section>
+    <h2>Features</h2>
+    <div class="features">
+      <div class="card">
+        <h3>Instant Sharing</h3>
+        <p>Share your info via QR code or NFC instantly.</p>
+      </div>
+      <div class="card">
+        <h3>Always Up-to-Date</h3>
+        <p>Update your info anytime without reprinting.</p>
+      </div>
+      <div class="card">
+        <h3>Eco-Friendly</h3>
+        <p>Reduce paper waste with a sustainable solution.</p>
+      </div>
+      <div class="card">
+        <h3>Wallet Ready</h3>
+        <p>Works with Apple, Google, and Samsung Wallet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>How It Works</h2>
+    <ol>
+      <li>Design your Digital Card.</li>
+      <li>Add it to your Wallet.</li>
+      <li>Share it instantly via QR or NFC.</li>
+    </ol>
+  </section>
+
+  <section id="pricing">
+    <h2>Pricing</h2>
+    <div class="pricing">
+      <div class="card">
+        <h3>Basic</h3>
+        <p>Essential features for individuals.</p>
+        <p><strong>$5 / month</strong></p>
+      </div>
+      <div class="card">
+        <h3>Pro</h3>
+        <p>Advanced features for professionals.</p>
+        <p><strong>$15 / month</strong></p>
+      </div>
+      <div class="card">
+        <h3>Enterprise</h3>
+        <p>Custom solutions for companies.</p>
+        <p><strong>Contact Us</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Digital Cards. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
