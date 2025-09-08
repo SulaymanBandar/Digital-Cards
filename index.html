@@ -13,50 +13,61 @@
       --text:#1a1a1f;
       --muted:#56586a;
       --bg:#ffffff;
-      --card:#f7f7fb; /* الخلفية統統統統統統統統統統統統統統統統統 */
+      --card:#f7f7fb;
       --glass:rgba(255,255,255,.6);
       --shadow:0 12px 30px rgba(20, 10, 50, .12);
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:"Tajawal",sans-serif;background:var(--bg);color:var(--text)}
+    html,body{margin:0;height:100%;scroll-behavior:smooth}
+    body{font-family:"Tajawal",sans-serif;background:var(--bg);color:var(--text)}
 
-    /* NAV */
-    .nav{position:sticky;top:0;background:linear-gradient(135deg,var(--primary-dark),var(--primary));box-shadow:var(--shadow)}
+    /* NAVBAR */
+    .nav{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,var(--primary-dark),var(--primary));box-shadow:var(--shadow)}
     .nav .wrap{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
-    .brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:800}
+    .brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none}
+    .brand span{font-weight:800;font-size:1.1rem}
     .nav a.link{color:#fff;text-decoration:none;margin-inline:10px;padding:8px 12px;border-radius:999px;border:1px solid #ffffff33}
     .nav a.link:hover{background:#ffffff22}
 
     /* HERO */
-    header.hero{color:#fff;background:linear-gradient(135deg,var(--primary-dark),var(--primary));padding:80px 18px;text-align:center}
-    header.hero h1{font-size:2.4rem;margin:0}
-    header.hero p{font-size:1.2rem;margin:10px 0 20px}
-    .btn{display:inline-block;padding:12px 20px;border-radius:999px;font-weight:700;text-decoration:none;margin:5px}
+    header.hero{position:relative;color:#fff;background:linear-gradient(135deg,var(--primary-dark),var(--primary));padding:80px 18px;text-align:center}
+    .hero h1{font-size:2.6rem;font-weight:800;margin:0}
+    .hero p{font-size:1.15rem;margin:10px 0 20px}
+    .btn{display:inline-block;padding:13px 22px;border-radius:999px;font-weight:800;text-decoration:none}
     .btn.primary{background:#fff;color:var(--primary-dark)}
     .btn.ghost{background:#ffffff22;color:#fff;border:1px solid #fff}
 
     /* SECTIONS */
     section{max-width:1200px;margin:0 auto;padding:56px 18px}
-    h2{font-size:1.8rem;margin-bottom:16px}
-    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    h2{font-size:1.9rem;margin-bottom:16px}
+    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
     .card{background:var(--card);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 8px;color:var(--primary-dark)}
+    .muted{color:var(--muted)}
+    .price{font-size:1.35rem;font-weight:800;color:var(--primary-dark)}
 
     /* HOW IT WORKS */
-    .steps{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-    .step{background:var(--card);padding:18px;border-radius:16px;box-shadow:var(--shadow)}
+    .steps{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .step{background:var(--card);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
 
     /* CONTACT */
     .contact{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .contact .tile{background:var(--card);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+    .contact .tile{
+      background:var(--card);   /* مثل باقي البوكسات */
+      border-radius:16px;
+      padding:18px;
+      box-shadow:var(--shadow);
+      color:var(--text);
+    }
 
-    footer{background:#f0eff7;color:#666;text-align:center;padding:20px;margin-top:40px}
+    footer{background:#f0eff7;color:#666;text-align:center;padding:22px;margin-top:36px}
   </style>
 </head>
 <body>
   <!-- NAV -->
   <nav class="nav">
     <div class="wrap">
-      <a class="brand" href="#home">Digital Cards</a>
+      <a class="brand" href="#home"><span>Digital Cards</span></a>
       <div>
         <a class="link" href="#home">الرئيسية</a>
         <a class="link" href="#contact">التواصل</a>
@@ -76,10 +87,10 @@
   <section id="how">
     <h2>كيف تعمل؟</h2>
     <div class="steps">
-      <div class="step"><h3>1. صمّم بطاقتك</h3><p>اختر القالب وأضف بياناتك.</p></div>
-      <div class="step"><h3>2. أضِفها لمحفظتك</h3><p>جاهزة للاستخدام عبر Apple/Google Wallet.</p></div>
-      <div class="step"><h3>3. شارك بلمسة</h3><p>امسح QR أو NFC لحفظ المعلومات.</p></div>
-      <div class="step"><h3>4. حدّث بسهولة</h3><p>تعديل بياناتك يظهر فورًا بدون إعادة طباعة.</p></div>
+      <div class="step"><h3>1. صمّم بطاقتك</h3><p class="muted">اختر القالب وأضف بياناتك.</p></div>
+      <div class="step"><h3>2. أضِفها لمحفظتك</h3><p class="muted">جاهزة للاستخدام عبر Apple/Google Wallet.</p></div>
+      <div class="step"><h3>3. شارك بلمسة</h3><p class="muted">امسح QR أو NFC لحفظ المعلومات.</p></div>
+      <div class="step"><h3>4. حدّث بسهولة</h3><p class="muted">تعديل بياناتك يظهر فورًا بدون إعادة طباعة.</p></div>
     </div>
   </section>
 
@@ -87,9 +98,9 @@
   <section id="pricing">
     <h2>الباقات والأسعار</h2>
     <div class="grid">
-      <div class="card"><h3>Basic</h3><p>19 ر.س / شهريًا</p></div>
-      <div class="card"><h3>Pro</h3><p>49 ر.س / شهريًا</p></div>
-      <div class="card"><h3>Enterprise</h3><p>تواصل معنا</p></div>
+      <div class="card"><h3>Basic</h3><p class="muted">للاستخدام الشخصي</p><p class="price">19 ر.س / شهريًا</p></div>
+      <div class="card"><h3>Pro</h3><p class="muted">خصائص متقدمة</p><p class="price">49 ر.س / شهريًا</p></div>
+      <div class="card"><h3>Enterprise</h3><p class="muted">للشركات</p><p class="price">تواصل معنا</p></div>
     </div>
   </section>
 
@@ -99,12 +110,14 @@
     <div class="contact">
       <div class="tile">
         <h3>جاهز للتواصل؟</h3>
-        <p>كل معلوماتي في ثوانٍ — تواصل أسرع وأسهل.</p>
-        <div><strong>الهاتف:</strong> ٠٥٤٥١٧٨٠٨٨</div>
+        <p class="muted">كل معلوماتي في ثوانٍ — تواصل أسرع وأسهل.</p>
+        <div style="margin-top:10px">
+          <div><strong>الهاتف:</strong> ٠٥٤٥١٧٨٠٨٨</div>
+        </div>
       </div>
       <div class="tile">
         <h3>ملاحظات الخصوصية</h3>
-        <p>نلتزم بحماية بياناتك واستخدام بنية آمنة لضمان الخصوصية.</p>
+        <p class="muted">نلتزم بحماية بياناتك واستخدام بنية تحتية آمنة لضمان الخصوصية.</p>
       </div>
     </div>
   </section>
