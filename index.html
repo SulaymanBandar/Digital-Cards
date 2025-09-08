@@ -8,107 +8,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --primary-dark:#3A0CA3; /* موف غامق */
-      --primary:#9D4EDD;       /* موف/خزامى */
+      --primary-dark:#3A0CA3;
+      --primary:#9D4EDD;
       --text:#1a1a1f;
       --muted:#56586a;
       --bg:#ffffff;
-      --card:#f7f7fb;
+      --card:#f7f7fb; /* الخلفية統統統統統統統統統統統統統統統統統 */
       --glass:rgba(255,255,255,.6);
       --shadow:0 12px 30px rgba(20, 10, 50, .12);
     }
     *{box-sizing:border-box}
-    html,body{margin:0;height:100%;scroll-behavior:smooth}
-    body{font-family:"Tajawal", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;background:var(--bg);color:var(--text)}
+    body{margin:0;font-family:"Tajawal",sans-serif;background:var(--bg);color:var(--text)}
 
-    /* ====== NAVBAR ====== */
-    .nav{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,var(--primary-dark),var(--primary));box-shadow:var(--shadow)}
+    /* NAV */
+    .nav{position:sticky;top:0;background:linear-gradient(135deg,var(--primary-dark),var(--primary));box-shadow:var(--shadow)}
     .nav .wrap{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
-    .brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none}
-    .brand span{font-weight:800;font-size:1.1rem}
+    .brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:800}
     .nav a.link{color:#fff;text-decoration:none;margin-inline:10px;padding:8px 12px;border-radius:999px;border:1px solid #ffffff33}
     .nav a.link:hover{background:#ffffff22}
 
-    /* ====== HERO ====== */
-    header.hero{position:relative;isolation:isolate;color:#fff;overflow:hidden}
-    header.hero .inner{max-width:1200px;margin:auto;padding:90px 18px 72px;display:grid;gap:24px;grid-template-columns:1.1fr .9fr}
-    @media (max-width:960px){header.hero .inner{grid-template-columns:1fr;padding:72px 18px}}
-
-    /* subtle tech background (hidden pattern) */
-    header.hero::before{
-      content:"";position:absolute;inset:0;z-index:-2;
-      background:linear-gradient(135deg,var(--primary-dark),var(--primary));
-    }
-    header.hero::after{
-      content:"";position:absolute;inset:0;z-index:-1;opacity:.18;mix-blend:screen;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.5' stroke-width='0.6'%3E%3Cpath d='M0 60h600M0 120h600M0 180h600M0 240h600M0 300h600M0 360h600M0 420h600M0 480h600M0 540h600'/%3E%3Cpath d='M60 0v600M120 0v600M180 0v600M240 0v600M300 0v600M360 0v600M420 0v600M480 0v600M540 0v600'/%3E%3Crect x='220' y='220' width='160' height='100' rx='12' ry='12'/%3E%3Crect x='255' y='238' width='28' height='28' rx='6'/%3E%3Crect x='325' y='238' width='45' height='45' rx='4'/%3E%3C/g%3E%3C/svg%3E");
-      background-size:600px 600px;filter:blur(1px);
-    }
-
-    .hero h1{font-size:2.6rem;line-height:1.2;margin:.2rem 0 0;font-weight:800}
-    .hero p.lead{font-size:1.15rem;opacity:.95;margin:.4rem 0 0}
-    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-    .btn{display:inline-block;padding:13px 22px;border-radius:999px;font-weight:800;text-decoration:none}
+    /* HERO */
+    header.hero{color:#fff;background:linear-gradient(135deg,var(--primary-dark),var(--primary));padding:80px 18px;text-align:center}
+    header.hero h1{font-size:2.4rem;margin:0}
+    header.hero p{font-size:1.2rem;margin:10px 0 20px}
+    .btn{display:inline-block;padding:12px 20px;border-radius:999px;font-weight:700;text-decoration:none;margin:5px}
     .btn.primary{background:#fff;color:var(--primary-dark)}
-    .btn.ghost{background:#ffffff22;color:#fff;border:1px solid #ffffff55}
+    .btn.ghost{background:#ffffff22;color:#fff;border:1px solid #fff}
 
-    .hero-card{background:var(--glass);backdrop-filter:blur(10px);border:1px solid #ffffff55;border-radius:20px;padding:20px;box-shadow:var(--shadow)}
-
-    /* ====== GRID SECTIONS ====== */
+    /* SECTIONS */
     section{max-width:1200px;margin:0 auto;padding:56px 18px}
-    h2{font-size:1.9rem;margin:0 0 16px}
-    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-    .card{background:var(--card);border-radius:16px;padding:18px 18px;box-shadow:var(--shadow)}
-    .card h3{margin:0 0 8px;color:var(--primary-dark);font-size:1.15rem}
-    .muted{color:var(--muted)}
-    .pill{display:inline-block;margin:6px 6px 0 0;padding:6px 10px;border-radius:999px;background:rgba(157,78,221,.12);color:var(--primary-dark);font-weight:700}
+    h2{font-size:1.8rem;margin-bottom:16px}
+    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .card{background:var(--card);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
 
-    /* ====== HOW IT WORKS ====== */
-    .steps{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-    .step{position:relative;border-radius:16px;padding:18px;background:var(--card);box-shadow:var(--shadow)}
-    .badge{width:36px;height:36px;border-radius:50%;display:grid;place-content:center;color:#fff;font-weight:800;margin-bottom:8px;background:linear-gradient(135deg,var(--primary-dark),var(--primary))}
-    .step h4{margin:4px 0 6px}
-    .step p{margin:0;color:var(--muted)}
+    /* HOW IT WORKS */
+    .steps{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+    .step{background:var(--card);padding:18px;border-radius:16px;box-shadow:var(--shadow)}
 
-    /* ====== PRICING ====== */
-    .price{font-size:1.35rem;font-weight:800;color:var(--primary-dark)}
-
-    /* ====== CONTACT ====== */
-    .contact{display:grid;gap:18px;grid-template-columns:1.2fr .8fr}
-    @media (max-width:960px){.contact{grid-template-columns:1fr}}
-    .contact .qrbox{height:110px;border-radius:14px;background:linear-gradient(135deg,var(--primary-dark),var(--primary))}
+    /* CONTACT */
+    .contact{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
     .contact .tile{background:var(--card);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
 
-    footer{background:#f0eff7;color:#666;text-align:center;padding:22px;margin-top:36px}
-
-    @media (prefers-color-scheme: dark){
-      body{background:#0f0f14;color:#eaeaf2}
-      .card,.step,.tile{background:#151726}
-      footer{background:#121323;color:#9aa0aa}
-      .muted{color:#a6a9b6}
-    }
+    footer{background:#f0eff7;color:#666;text-align:center;padding:20px;margin-top:40px}
   </style>
 </head>
 <body>
-  <!-- ====== NAV ====== -->
+  <!-- NAV -->
   <nav class="nav">
     <div class="wrap">
-      <a class="brand" href="#home" aria-label="Digital Cards Home">
-        <!-- inline SVG logo (رمز البطاقة + QR) -->
-        <svg width="36" height="36" viewBox="0 0 64 64" aria-hidden="true">
-          <defs>
-            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%" stop-color="#3A0CA3"/>
-              <stop offset="100%" stop-color="#9D4EDD"/>
-            </linearGradient>
-          </defs>
-          <rect x="6" y="12" rx="8" ry="8" width="52" height="40" fill="url(#g)"/>
-          <circle cx="22" cy="29" r="6.2" fill="#fff"/>
-          <rect x="36" y="22" width="14" height="14" rx="2" fill="#fff"/>
-          <rect x="16" y="40" width="32" height="3.5" rx="2" fill="#ffffffcc"/>
-        </svg>
-        <span>Digital Cards</span>
-      </a>
+      <a class="brand" href="#home">Digital Cards</a>
       <div>
         <a class="link" href="#home">الرئيسية</a>
         <a class="link" href="#contact">التواصل</a>
@@ -116,138 +64,47 @@
     </div>
   </nav>
 
-  <!-- ====== HERO ====== -->
+  <!-- HERO -->
   <header id="home" class="hero">
-    <div class="inner">
-      <div>
-        <div class="hero-card">
-          <h1>بطاقتك التعريفية الذكية</h1>
-          <p class="lead">شارك بياناتك بلمسة واحدة — حديثة، آمنة، ودائمًا محدّثة.</p>
-          <div class="cta-row">
-            <a class="btn primary" href="#pricing">ابدأ الآن</a>
-            <a class="btn ghost" href="#how">كيف تعمل؟</a>
-          </div>
-        </div>
-        <div style="margin-top:14px;color:#fff;opacity:.9">
-          <span class="pill" style="background:#ffffff22;color:#fff;border:1px solid #ffffff44">Apple/Google/Samsung Wallet</span>
-          <span class="pill" style="background:#ffffff22;color:#fff;border:1px solid #ffffff44">QR · NFC</span>
-          <span class="pill" style="background:#ffffff22;color:#fff;border:1px solid #ffffff44">صديقة للبيئة</span>
-        </div>
-      </div>
-      <div>
-        <!-- بطاقة عرض اللوجو كبيرة -->
-        <div class="hero-card" style="display:grid;place-items:center;aspect-ratio:1.2/1">
-          <svg width="240" height="170" viewBox="0 0 64 44" aria-hidden="true">
-            <defs>
-              <linearGradient id="lg" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stop-color="#3A0CA3"/>
-                <stop offset="100%" stop-color="#9D4EDD"/>
-              </linearGradient>
-            </defs>
-            <rect x="2" y="2" rx="6" ry="6" width="60" height="40" fill="url(#lg)"/>
-            <circle cx="16" cy="18" r="5" fill="#fff"/>
-            <rect x="38" y="12" width="14" height="14" rx="2" fill="#fff"/>
-            <rect x="10" y="30" width="44" height="3.2" rx="2" fill="#ffffffcc"/>
-          </svg>
-        </div>
-      </div>
-    </div>
+    <h1>بطاقتك التعريفية الذكية</h1>
+    <p>شارك بياناتك بلمسة واحدة — حديثة، آمنة، ودائمًا محدّثة.</p>
+    <a class="btn primary" href="#pricing">ابدأ الآن</a>
+    <a class="btn ghost" href="#how">كيف تعمل؟</a>
   </header>
 
-  <!-- ====== VALUE ====== -->
-  <section>
-    <h2>لماذا البطاقات الرقمية؟</h2>
-    <p class="muted">حل حديث يغنيك عن الورق — يحفظ بياناتك، يسهّل مشاركتها، ويحدّثها فورًا بدون طباعة.</p>
-    <div class="grid" style="margin-top:14px">
-      <div class="card"><h3>مشاركة فورية</h3><p>امسح واحتفظ بالمعلومات مباشرة في جهات الاتصال عبر QR/NFC.</p></div>
-      <div class="card"><h3>دائمًا محدّثة</h3><p>عدّل بياناتك بأي وقت وتنعكس فورًا على كل من يملك بطاقتك.</p></div>
-      <div class="card"><h3>جاهزة للمحافظ</h3><p>تعمل مع Apple / Google / Samsung Wallet دون تعقيد.</p></div>
-      <div class="card"><h3>صديقة للبيئة</h3><p>استغنِ عن الورق والبلاستيك— خيار مستدام وأنيق.</p></div>
-    </div>
-  </section>
-
-  <!-- ====== HOW IT WORKS ====== -->
+  <!-- HOW IT WORKS -->
   <section id="how">
     <h2>كيف تعمل؟</h2>
     <div class="steps">
-      <div class="step">
-        <div class="badge">1</div>
-        <h4>صمّم بطاقتك</h4>
-        <p>اختر القالب والألوان، أضف اسمك، صورتك، وبياناتك الأساسية.</p>
-      </div>
-      <div class="step">
-        <div class="badge">2</div>
-        <h4>أضِفها لمحفظتك</h4>
-        <p>احفظها مباشرة في Apple/Google/Samsung Wallet لتكون دائمًا معك.</p>
-      </div>
-      <div class="step">
-        <div class="badge">3</div>
-        <h4>شارك بلمسة</h4>
-        <p>امسح QR أو قرّب NFC ليتم حفظ بياناتك آليًا لدى الطرف الآخر.</p>
-      </div>
-      <div class="step">
-        <div class="badge">4</div>
-        <h4>حدّث بسهولة</h4>
-        <p>غيّر رقمك أو بريدك متى شئت—يظهر التحديث فورًا بدون طباعة جديدة.</p>
-      </div>
+      <div class="step"><h3>1. صمّم بطاقتك</h3><p>اختر القالب وأضف بياناتك.</p></div>
+      <div class="step"><h3>2. أضِفها لمحفظتك</h3><p>جاهزة للاستخدام عبر Apple/Google Wallet.</p></div>
+      <div class="step"><h3>3. شارك بلمسة</h3><p>امسح QR أو NFC لحفظ المعلومات.</p></div>
+      <div class="step"><h3>4. حدّث بسهولة</h3><p>تعديل بياناتك يظهر فورًا بدون إعادة طباعة.</p></div>
     </div>
   </section>
 
-  <!-- ====== PRICING ====== -->
+  <!-- PRICING -->
   <section id="pricing">
     <h2>الباقات والأسعار</h2>
     <div class="grid">
-      <div class="card">
-        <h3>Basic</h3>
-        <p class="muted">للاستخدام الشخصي والمستقلين</p>
-        <p class="price">19 ر.س / شهريًا</p>
-        <div>
-          <span class="pill">QR</span>
-          <span class="pill">محفظة</span>
-          <span class="pill">قالب أساسي</span>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Pro</h3>
-        <p class="muted">ميزات إضافية وخصائص تخصيص</p>
-        <p class="price">49 ر.س / شهريًا</p>
-        <div>
-          <span class="pill">قوالب متقدمة</span>
-          <span class="pill">إحصائيات</span>
-          <span class="pill">دعم أولوية</span>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Enterprise</h3>
-        <p class="muted">حلول مخصصة للشركات والفرق</p>
-        <p class="price">تواصل معنا</p>
-        <div>
-          <span class="pill">إدارة فرق</span>
-          <span class="pill">نطاق مخصص</span>
-          <span class="pill">تكاملات</span>
-        </div>
-      </div>
+      <div class="card"><h3>Basic</h3><p>19 ر.س / شهريًا</p></div>
+      <div class="card"><h3>Pro</h3><p>49 ر.س / شهريًا</p></div>
+      <div class="card"><h3>Enterprise</h3><p>تواصل معنا</p></div>
     </div>
   </section>
 
-  <!-- ====== CONTACT ====== -->
+  <!-- CONTACT -->
   <section id="contact">
     <h2>التواصل</h2>
     <div class="contact">
       <div class="tile">
-        <h3 style="margin-top:0">جاهز للتواصل؟</h3>
-        <p class="muted">كل معلوماتي في ثوانٍ — تواصل أسرع وأسهل.</p>
-        <div style="margin-top:10px;display:flex;gap:10px;align-items:center">
-          <div class="qrbox" title="QR placeholder"></div>
-          <div>
-            <div style="font-weight:800">الهاتف</div>
-            <div>٠٥٤٥١٧٨٠٨٨</div>
-          </div>
-        </div>
+        <h3>جاهز للتواصل؟</h3>
+        <p>كل معلوماتي في ثوانٍ — تواصل أسرع وأسهل.</p>
+        <div><strong>الهاتف:</strong> ٠٥٤٥١٧٨٠٨٨</div>
       </div>
       <div class="tile">
-        <h3 style="margin-top:0">ملاحظات الخصوصية</h3>
-        <p class="muted">نلتزم بحماية بياناتك واستخدام بنية تحتية آمنة لضمان الخصوصية والموثوقية.</p>
+        <h3>ملاحظات الخصوصية</h3>
+        <p>نلتزم بحماية بياناتك واستخدام بنية آمنة لضمان الخصوصية.</p>
       </div>
     </div>
   </section>
