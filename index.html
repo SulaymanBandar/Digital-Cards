@@ -1,411 +1,536 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- ===== Meta & SEO ===== -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f1024" />
+  <meta name="color-scheme" content="dark light" />
   <title>Digital Cards | البطاقات الرقمية</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="بطاقات رقمية ذكية بلمسة واحدة — شارك بياناتك فوراً عبر NFC/QR مع تكامل Apple/Google Wallet." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/favicon.png" />
+  <meta property="og:title" content="Digital Cards | البطاقات الرقمية" />
+  <meta property="og:description" content="استغنِ عن الورق. بطاقة رقمية ذكية تعمل مع Apple/Google Wallet." />
+  <meta property="og:image" content="assets/og-cover.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <style>
-    /* ================= VARIABLES ================= */
-    :root {
-      --primary-dark: #3A0CA3;
-      --primary: #9D4EDD;
-      --primary-light: #C77DFF;
-      --text: #1d1d1f;
-      --text-secondary: #86868b;
-      --bg: #ffffff;
-      --bg-secondary: #f5f5f7;
-      --card: #ffffff;
-      --border: #d2d2d7;
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      --shadow-hover: 0 8px 40px rgba(0, 0, 0, 0.12);
-      --glass: rgba(255, 255, 255, 0.8);
-      --gradient: linear-gradient(135deg, var(--primary-dark), var(--primary));
-      --gradient-light: linear-gradient(135deg, var(--primary), var(--primary-light));
+    /* ============ Tokens ============ */
+    :root{
+      --bg: #0b0c1a;
+      --surface: #101227;
+      --surface-2:#151831;
+      --text: #f5f7ff;
+      --muted:#a3a7c3;
+      --brand:#7c5cff;
+      --brand-2:#3ea7ff;
+      --good:#10b981;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --ring: 0 0 0 2px color-mix(in oklab, var(--brand), transparent 70%);
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --radius: 16px;
+      --grid: 1200px;
+      --gap: 24px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#ffffff;
+        --surface:#f7f8ff;
+        --surface-2:#eef0ff;
+        --text:#0b0c1a;
+        --muted:#4b4f6b;
+      }
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    /* ============ Base ============ */
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      background: radial-gradient(1200px 800px at 80% -10%, color-mix(in oklab, var(--brand), transparent 70%) 0%, transparent 50%) , var(--bg);
+      color:var(--text); line-height:1.65; overflow-x:hidden;
+    }
+    img{max-width:100%; display:block}
+    a{color:inherit; text-decoration:none}
+    .container{max-width:var(--grid); margin-inline:auto; padding-inline:var(--gap)}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px; padding:14px 22px; border-radius:999px;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:white; font-weight:800;
+      border:none; cursor:pointer; box-shadow:var(--shadow); transition:transform .2s ease, filter .2s ease;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn.ghost{
+      background:transparent; color:var(--text); border:1px solid color-mix(in oklab, var(--text), transparent 70%);
+      box-shadow:none;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px;
+      background:color-mix(in oklab, var(--brand), transparent 85%); color:var(--brand-2); font-weight:700; font-size:.85rem;
+      border:1px solid color-mix(in oklab, var(--brand), transparent 70%);
+    }
+    .card{
+      background:linear-gradient(180deg, color-mix(in oklab, var(--surface), transparent 0%) 0%, color-mix(in oklab, var(--surface-2), transparent 0%) 100%);
+      border:1px solid color-mix(in oklab, var(--text), transparent 90%);
+      border-radius:var(--radius); box-shadow:var(--shadow);
     }
 
-    html {
-      scroll-behavior: smooth;
+    /* ============ Nav ============ */
+    .nav{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(14px);
+      background:color-mix(in oklab, var(--bg), transparent 20%);
+      border-bottom:1px solid color-mix(in oklab, var(--text), transparent 90%);
+    }
+    .nav-wrap{display:flex; align-items:center; justify-content:space-between; height:72px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:900}
+    .brand img{width:36px; height:36px; border-radius:10px}
+    .nav-links{display:flex; gap:18px}
+    .nav-links a{padding:8px 12px; border-radius:10px; color:var(--muted); font-weight:700}
+    .nav-links a:hover{background:color-mix(in oklab, var(--text), transparent 92%); color:var(--text)}
+    .nav-cta{display:flex; gap:10px; align-items:center}
+    .menu-btn{display:none}
+    @media (max-width: 900px){
+      .nav-links{display:none}
+      .menu-btn{display:inline-flex}
     }
 
-    body {
-      font-family: "Tajawal", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
+    /* ============ Hero ============ */
+    .hero{position:relative; padding:120px 0 80px}
+    .hero-grid{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;
     }
-
-    /* ================= NAVBAR ================= */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      transition: all 0.3s ease;
+    .hero h1{font-size:clamp(36px,5vw,64px); line-height:1.05; margin:0 0 14px; font-weight:900}
+    .hero p{font-size:clamp(16px,2.2vw,20px); color:var(--muted); margin:0 0 22px}
+    .hero-cta{display:flex; gap:12px; flex-wrap:wrap}
+    .phone{
+      width:min(360px,85%); aspect-ratio:9/19; border-radius:38px; padding:12px; margin-inline:auto;
+      background:#111; border:1px solid #222; position:relative; transform:perspective(1000px) rotateY(-12deg) rotateX(3deg);
+      box-shadow:0 40px 80px rgba(0,0,0,.35);
     }
-
-    .navbar.scrolled {
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: var(--shadow);
+    .screen{
+      height:100%; border-radius:28px; overflow:hidden; position:relative;
+      background:radial-gradient(120% 100% at 100% 0%, #2b2d66 0%, #0f1024 40%, #080914 100%);
     }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      height: 70px;
+    .wallet-card{
+      position:absolute; inset:auto 18px 18px 18px; height:46%; border-radius:22px; padding:18px;
+      background:linear-gradient(135deg, #ffffff, #f2f3ff); color:#0e0f1c; display:flex; flex-direction:column; gap:10px;
+      box-shadow:0 12px 40px rgba(0,0,0,.35);
     }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 700;
-      font-size: 1.2rem;
-      transition: transform 0.2s ease;
+    .wallet-card .row{display:flex; justify-content:space-between; align-items:center}
+    .badge{width:42px; height:42px; border-radius:10px; background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    .chip{width:54px; height:36px; border-radius:10px; background:linear-gradient(135deg,#e9e9f6,#d5d8ff)}
+    .float{
+      position:absolute; inset:auto; width:64px; height:42px; border-radius:12px; backdrop-filter:blur(8px);
+      background:color-mix(in oklab, var(--brand-2), transparent 86%); border:1px solid color-mix(in oklab, var(--brand-2), transparent 70%);
+      animation:float 6s ease-in-out infinite;
     }
-
-    .logo:hover {
-      transform: scale(1.05);
+    .float.f1{top:12%; inset-inline-end:10%}
+    .float.f2{top:48%; inset-inline-end:2%; animation-delay:1.2s}
+    .float.f3{top:32%; inset-inline-start:6%; animation-delay:2.2s}
+    @keyframes float{
+      0%,100%{transform:translateY(0) rotate(0)}
+      50%{transform:translateY(-16px) rotate(4deg)}
     }
+    @media (max-width: 1000px){ .hero-grid{grid-template-columns:1fr; text-align:center} .phone{transform:none} }
 
-    .logo img {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
+    /* ============ Section header ============ */
+    .section{padding:90px 0}
+    .header{margin-bottom:36px; display:grid; gap:10px; text-align:center}
+    .header .k{justify-self:center}
+
+    /* ============ Features ============ */
+    .features-grid{
+      display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap);
     }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
+    .feature{
+      padding:24px; border-radius:var(--radius);
+      background:linear-gradient(180deg, color-mix(in oklab, var(--surface), transparent 0%), color-mix(in oklab, var(--surface-2), transparent 0%));
+      border:1px solid color-mix(in oklab, var(--text), transparent 92%);
     }
+    .feature h3{margin:10px 0 6px}
+    .feature p{color:var(--muted); margin:0}
+    .ic{font-size:26px}
+    @media (max-width: 1000px){ .features-grid{grid-template-columns:1fr 1fr} }
+    @media (max-width: 620px){ .features-grid{grid-template-columns:1fr} }
 
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 500;
-      padding: 8px 16px;
-      border-radius: 20px;
-      transition: all 0.2s ease;
+    /* ============ Showcase ============ */
+    .showcase{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;
     }
+    .show-img{border-radius:var(--radius); overflow:hidden; border:1px solid color-mix(in oklab, var(--text), transparent 90%)}
+    @media (max-width: 1000px){ .showcase{grid-template-columns:1fr} }
 
-    .nav-links a:hover {
-      background: var(--bg-secondary);
-      color: var(--primary);
+    /* ============ Pricing ============ */
+    .toggle{
+      display:inline-flex; border-radius:999px; border:1px solid color-mix(in oklab, var(--text), transparent 85%);
+      overflow:hidden; margin:10px auto 26px; font-weight:800
     }
-
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
+    .toggle button{
+      padding:10px 16px; background:transparent; color:var(--muted); border:none; cursor:pointer
     }
-
-    .mobile-menu span {
-      width: 25px;
-      height: 3px;
-      background: var(--text);
-      margin: 3px 0;
-      border-radius: 2px;
+    .toggle button.active{
+      background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff
     }
+    .plans{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap)}
+    .plan{padding:28px}
+    .plan.featured{outline: var(--ring)}
+    .price{font-size:40px; font-weight:900; margin:4px 0}
+    .per{color:var(--muted)}
+    .ul{list-style:none; padding:0; margin:16px 0 0; display:grid; gap:10px}
+    .ul li{display:flex; gap:10px; align-items:flex-start}
+    .ul .ok{font-weight:900; color:var(--good)}
+    @media (max-width: 1000px){ .plans{grid-template-columns:1fr} }
 
-    /* ================= HERO ================= */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      background: var(--gradient);
-      color: white;
+    /* ============ Contact ============ */
+    .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--gap)}
+    .qr{display:grid; place-items:center; padding:26px}
+    .qr .box{
+      width:220px; aspect-ratio:1; border-radius:18px;
+      background:repeating-linear-gradient(45deg, var(--surface-2) 0 8px, var(--surface) 8px 16px);
+      display:grid; place-items:center; font-weight:800; letter-spacing:1px;
+      border:1px dashed color-mix(in oklab, var(--text), transparent 70%);
     }
+    @media (max-width: 900px){ .contact-grid{grid-template-columns:1fr} }
 
-    .hero-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
+    /* ============ FAQ ============ */
+    .faq{display:grid; gap:12px; max-width:900px; margin-inline:auto}
+    details{background:var(--surface); border:1px solid color-mix(in oklab, var(--text), transparent 90%); border-radius:12px; padding:14px 18px}
+    details[open]{outline:var(--ring)}
+    summary{cursor:pointer; font-weight:800}
 
-    .hero-content h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 24px;
-      background: linear-gradient(135deg, #ffffff, #f0f0f0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    /* ============ Footer ============ */
+    footer{border-top:1px solid color-mix(in oklab, var(--text), transparent 90%); padding:32px 0 50px; color:var(--muted)}
+    .foot{display:grid; gap:6px; text-align:center}
 
-    .hero-content p {
-      font-size: 1.3rem;
-      margin-bottom: 32px;
-      opacity: 0.9;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 32px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-      background: white;
-      color: var(--primary-dark);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-    }
-
-    /* ================= FEATURES ================= */
-    .features {
-      padding: 120px 0;
-      background: var(--bg-secondary);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-    }
-
-    .feature-card {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 40px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    }
-
-    /* ================= HOW IT WORKS ================= */
-    .how-it-works {
-      padding: 120px 0;
-    }
-
-    .steps-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-      margin-top: 60px;
-    }
-
-    .step {
-      text-align: center;
-    }
-
-    /* ================= PRICING ================= */
-    .pricing {
-      padding: 120px 0;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-    }
-
-    .pricing-card {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 40px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border);
-    }
-
-    .pricing-card.featured {
-      border-color: var(--primary);
-      transform: scale(1.05);
-    }
-
-    /* ================= CONTACT ================= */
-    .contact {
-      padding: 120px 0;
-      background: var(--bg-secondary);
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      margin-top: 60px;
-    }
-
-    /* ================= FOOTER ================= */
-    .footer {
-      background: #1d1d1f;
-      color: #f5f5f7;
-      padding: 60px 0 30px;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      text-align: center;
+    /* ============ A11y Motion ============ */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none!important; transition:none!important}
     }
   </style>
 </head>
 <body>
 
-  <!-- ============== NAVBAR ============== -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="#home" class="logo">
-        <img src="images/logo.png" alt="Digital Cards Logo">
+  <!-- ===== Nav ===== -->
+  <header class="nav">
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="العودة للرئيسية">
+        <img src="assets/logo.png" alt="Digital Cards">
         <span>Digital Cards</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="#home">الرئيسية</a></li>
-        <li><a href="#features">المميزات</a></li>
-        <li><a href="#how-it-works">كيف تعمل</a></li>
-        <li><a href="#pricing">الأسعار</a></li>
-        <li><a href="#contact">التواصل</a></li>
-      </ul>
-      <div class="mobile-menu">
-        <span></span>
-        <span></span>
-        <span></span>
+      <nav class="nav-links" aria-label="روابط أساسية">
+        <a href="#features">المميزات</a>
+        <a href="#how">كيف تعمل</a>
+        <a href="#pricing">الأسعار</a>
+        <a href="#contact">التواصل</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn ghost" href="#demo">جرّب الديمو</a>
+        <button class="btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav">القائمة</button>
       </div>
     </div>
-  </nav>
+    <!-- Mobile sheet -->
+    <div id="mnav" hidden>
+      <div class="container" style="padding:14px 0 18px; display:grid; gap:10px">
+        <a href="#features">المميزات</a>
+        <a href="#how">كيف تعمل</a>
+        <a href="#pricing">الأسعار</a>
+        <a href="#contact">التواصل</a>
+      </div>
+    </div>
+  </header>
 
-  <!-- ============== HERO ============== -->
+  <!-- ===== Hero ===== -->
   <section id="home" class="hero">
-    <div class="hero-container">
-      <div class="hero-content">
-        <h1>بطاقتك التعريفية الذكية</h1>
-        <p>شارك بياناتك بلمسة واحدة — حديثة، آمنة، ودائمًا محدّثة.</p>
-        <div class="cta-buttons">
-          <a href="#pricing" class="btn btn-primary">ابدأ الآن</a>
-          <a href="#how-it-works" class="btn btn-secondary">كيف تعمل؟</a>
+    <div class="container hero-grid">
+      <div>
+        <span class="pill k">NFC • QR • Wallet</span>
+        <h1>بطاقتك الرقمية الذكيّة — تشارك بلمسة وتُحدَّث في لحظة</h1>
+        <p>استبدل البطاقات الورقية بحل أنيق يعمل مع <b>Apple/Google Wallet</b>. مشاركة فورية، تحكم كامل، وواجهة تُشبه أفضل منتجات العالم.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#pricing" aria-label="ابدأ الآن">ابدأ الآن</a>
+          <a class="btn ghost" href="#how" aria-label="تعرف كيف تعمل">كيف تعمل؟</a>
         </div>
+        <p style="margin-top:12px; color:var(--muted)">لا حاجة للطباعة • تحديثات غير محدودة • تكامل API للمؤسسات</p>
       </div>
+
+      <div aria-hidden="true">
+        <div class="phone card">
+          <div class="screen">
+            <div class="float f1"></div><div class="float f2"></div><div class="float f3"></div>
+            <div class="wallet-card">
+              <div class="row">
+                <div class="badge"></div>
+                <div class="chip"></div>
+              </div>
+              <div>
+                <div style="font-weight:900; font-size:20px">اسم المستخدم</div>
+                <div style="color:#3a3f67">المسمّى الوظيفي</div>
+                <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
+                  <span class="pill" style="background:#111; color:#fff; border:none">QR</span>
+                  <span class="pill" style="background:#111; color:#fff; border:none">NFC</span>
+                  <span class="pill" style="background:#111; color:#fff; border:none">Wallet</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /visual -->
     </div>
   </section>
 
-  <!-- ============== FEATURES ============== -->
-  <section id="features" class="features">
+  <!-- ===== Features ===== -->
+  <section id="features" class="section">
     <div class="container">
-      <h2>لماذا البطاقات الرقمية؟</h2>
+      <div class="header">
+        <span class="pill k">لماذا نحن؟</span>
+        <h2 style="margin:0">كل ما تحتاجه لبطاقة تعريفية حديثة</h2>
+        <p style="color:var(--muted); margin:0">أداء عالي، تصميم فخم، وتجربة مستخدم سلسة مستلهمة من منتجات أبل.</p>
+      </div>
+
       <div class="features-grid">
-        <div class="feature-card">📱 مشاركة فورية</div>
-        <div class="feature-card">🔄 دائمًا محدّثة</div>
-        <div class="feature-card">💳 جاهزة للمحافظ</div>
-        <div class="feature-card">🌱 صديقة للبيئة</div>
+        <article class="feature">
+          <div class="ic">⚡️</div>
+          <h3>مشاركة لحظية</h3>
+          <p>أرسل بياناتك عبر QR/NFC ليُحفظ الاتصال مباشرة في جهاز الطرف الآخر.</p>
+        </article>
+        <article class="feature">
+          <div class="ic">🔄</div>
+          <h3>تحديثات فورية</h3>
+          <p>عدّل رقمك/بريدك ويظهر التغيير فورًا للجميع — لا طباعة من جديد.</p>
+        </article>
+        <article class="feature">
+          <div class="ic">💼</div>
+          <h3>جاهزة للمحافظ</h3>
+          <p>تكامل أنيق مع Apple/Google/Samsung Wallet بلمسة واحدة.</p>
+        </article>
+        <article class="feature">
+          <div class="ic">🛡️</div>
+          <h3>خصوصية وأمان</h3>
+          <p>روابط موقّعة، صلاحيات دقيقة، وسجلات وصول على مستوى المؤسسة.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ============== HOW IT WORKS ============== -->
-  <section id="how-it-works" class="how-it-works">
-    <div class="container">
-      <h2>كيف تعمل؟</h2>
-      <div class="steps-container">
-        <div class="step">1. صمّم بطاقتك</div>
-        <div class="step">2. أضفها لمحفظتك</div>
-        <div class="step">3. شارك بلمسة</div>
-        <div class="step">4. حدّث بسهولة</div>
+  <!-- ===== Showcase ===== -->
+  <section id="how" class="section">
+    <div class="container showcase">
+      <div>
+        <span class="pill k">أربع خطوات</span>
+        <h2 style="margin:10px 0 8px">ابدأ خلال دقائق — بدون تعقيد</h2>
+        <ol style="color:var(--muted); margin:0; padding:0 18px; display:grid; gap:8px">
+          <li><b>صمّم بطاقتك</b>: اختر القالب والألوان وأضف بياناتك. <!-- TODO: اذكر الـ USP من البزنس مودل --></li>
+          <li><b>أضِفها لمحفظتك</b>: Apple/Google Wallet مباشرة.</li>
+          <li><b>شارك بلمسة</b>: QR/NFC لحفظ جهة الاتصال آليًا.</li>
+          <li><b>حدّث في أي وقت</b>: كل تغييراتك تظهر فورًا.</li>
+        </ol>
+        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn" href="#demo">جرّب الديمو</a>
+          <a class="btn ghost" href="#docs">المستندات التقنية</a>
+        </div>
+      </div>
+      <div class="show-img card">
+        <img src="assets/wallet_card.png" alt="بطاقة رقمية داخل المحفظة" loading="lazy">
       </div>
     </div>
   </section>
 
-  <!-- ============== PRICING ============== -->
-  <section id="pricing" class="pricing">
+  <!-- ===== Pricing ===== -->
+  <section id="pricing" class="section">
     <div class="container">
-      <h2>الباقات والأسعار</h2>
-      <div class="pricing-grid">
-        <div class="pricing-card">Basic - 19 ر.س</div>
-        <div class="pricing-card featured">Pro - 49 ر.س</div>
-        <div class="pricing-card">Enterprise - مخصص</div>
+      <div class="header">
+        <span class="pill k">الأسعار</span>
+        <h2 style="margin:0">باقات مرنة تبدأ من الشخصي إلى المؤسسات</h2>
+        <div class="toggle" role="tablist" aria-label="تبديل الفوترة">
+          <button id="m" class="active" role="tab" aria-selected="true">شهري</button>
+          <button id="y" role="tab" aria-selected="false">سنوي <span style="color:var(--good)">-20%</span></button>
+        </div>
+      </div>
+
+      <div class="plans">
+        <article class="plan card" data-plan="basic">
+          <h3>Basic</h3>
+          <div class="price"><span class="v-month">19</span><span class="v-year" hidden>15</span> ر.س</div>
+          <div class="per">/ <span class="v-month">شهريًا</span><span class="v-year" hidden>شهريًا (دفع سنوي)</span></div>
+          <ul class="ul">
+            <li><span class="ok">✓</span> بطاقة واحدة</li>
+            <li><span class="ok">✓</span> QR و NFC</li>
+            <li><span class="ok">✓</span> قوالب أساسية</li>
+            <li><span class="ok">✓</span> تحديثات غير محدودة</li>
+          </ul>
+          <div style="margin-top:18px"><a class="btn" href="#contact">ابدأ</a></div>
+        </article>
+
+        <article class="plan card featured" data-plan="pro" aria-label="الخيار الأكثر شعبية">
+          <h3>Pro</h3>
+          <div class="price"><span class="v-month">49</span><span class="v-year" hidden>39</span> ر.س</div>
+          <div class="per">/ <span class="v-month">شهريًا</span><span class="v-year" hidden>شهريًا (دفع سنوي)</span></div>
+          <ul class="ul">
+            <li><span class="ok">✓</span> حتى 5 بطاقات</li>
+            <li><span class="ok">✓</span> قوالب متقدمة</li>
+            <li><span class="ok">✓</span> تحليلات المشاهدات</li>
+            <li><span class="ok">✓</span> تكاملات اجتماعية</li>
+            <li><span class="ok">✓</span> دعم أولوية</li>
+          </ul>
+          <div style="margin-top:18px"><a class="btn" href="#contact">اختر Pro</a></div>
+        </article>
+
+        <article class="plan card" data-plan="ent">
+          <h3>Enterprise</h3>
+          <div class="price">مخصص</div>
+          <div class="per">حسب الاحتياج</div>
+          <ul class="ul">
+            <li><span class="ok">✓</span> بطاقات غير محدودة</li>
+            <li><span class="ok">✓</span> إدارة فرق ونطاق مخصص</li>
+            <li><span class="ok">✓</span> تكاملات API وأمن مؤسسي</li>
+            <li><span class="ok">✓</span> مدير حساب + تدريب</li>
+          </ul>
+          <div style="margin-top:18px"><a class="btn" href="#contact">تواصل معنا</a></div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ============== CONTACT ============== -->
-  <section id="contact" class="contact">
+  <!-- ===== Contact ===== -->
+  <section id="contact" class="section">
     <div class="container">
-      <h2>التواصل</h2>
+      <div class="header">
+        <span class="pill k">تواصل</span>
+        <h2 style="margin:0">جاهز للانطلاق؟</h2>
+        <p style="color:var(--muted); margin:0">راسلنا وخلال دقائق نجهّز لك بطاقتك.</p>
+      </div>
+
       <div class="contact-grid">
-        <div class="contact-info">
-          <p>📞 0545178088</p>
-          <p>📧 info@digitalcards.sa</p>
-          <p>🌐 www.digitalcards.sa</p>
+        <div class="card" style="padding:22px">
+          <h3 style="margin-top:0">معلومات التواصل</h3>
+          <div style="display:grid; gap:10px; color:var(--muted)">
+            <div>📞 الهاتف: <b>0545178088</b></div>
+            <div>📧 البريد: <a href="mailto:info@digitalcards.sa"><b>info@digitalcards.sa</b></a></div>
+            <div>🌐 الموقع: <a href="https://www.digitalcards.sa" target="_blank" rel="noopener"><b>digitalcards.sa</b></a></div>
+          </div>
+
+          <form id="lead" class="card" style="margin-top:18px; padding:16px" onsubmit="return false" novalidate>
+            <label>الاسم الكامل</label>
+            <input name="name" required placeholder="اكتب اسمك" style="margin:8px 0 12px; width:100%; padding:12px; border-radius:12px; border:1px solid color-mix(in oklab, var(--text), transparent 85%); background:var(--surface); color:var(--text)"/>
+            <label>البريد الإلكتروني</label>
+            <input type="email" name="email" required placeholder="example@mail.com" style="margin:8px 0 12px; width:100%; padding:12px; border-radius:12px; border:1px solid color-mix(in oklab, var(--text), transparent 85%); background:var(--surface); color:var(--text)"/>
+            <label>الرسالة</label>
+            <textarea name="msg" rows="4" placeholder="كيف نقدر نخدمك؟" style="margin:8px 0 12px; width:100%; padding:12px; border-radius:12px; border:1px solid color-mix(in oklab, var(--text), transparent 85%); background:var(--surface); color:var(--text)"></textarea>
+            <button class="btn" id="sendBtn">أرسل الطلب</button>
+            <div id="formNote" style="margin-top:10px; color:var(--muted)"></div>
+          </form>
         </div>
-        <div class="qr-section">
-          <p>امسح للتواصل السريع</p>
-          <div class="qr-placeholder">QR</div>
+
+        <div class="qr card">
+          <div class="box">QR CODE</div>
+          <p style="color:var(--muted); margin-top:12px">امسح للحصول على جميع معلومات التواصل مباشرة.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============== FOOTER ============== -->
-  <footer class="footer">
-    <div class="footer-content">
-      <p>© 2025 Digital Cards. جميع الحقوق محفوظة.</p>
+  <!-- ===== FAQ ===== -->
+  <section class="section" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="header">
+        <span class="pill k">الأسئلة الشائعة</span>
+        <h2 id="faq-title" style="margin:0">قبل ما تسأل — هنا الجواب</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>هل تعمل البطاقة بدون إنترنت؟</summary>
+          <p>نعم، عبر NFC تُفتح بطاقة جهة الاتصال المدمجة. بعض الروابط قد تحتاج اتصالًا لفتحها.</p>
+        </details>
+        <details>
+          <summary>كيف أعدّل بياناتي بعد المشاركة؟</summary>
+          <p>من لوحة التحكم تغيّر بياناتك، وكل من يحتفظ ببطاقتك يشاهد التحديث فورًا.</p>
+        </details>
+        <details>
+          <summary>هل تدعم المحافظ الرقمية؟</summary>
+          <p>ندعم Apple/Google/Samsung Wallet بإضافة فورية بلمسة واحدة.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <div class="container foot">
+      <div style="display:flex; gap:10px; align-items:center; justify-content:center">
+        <img src="assets/logo.png" alt="" width="28" height="28" style="border-radius:8px; opacity:.9" />
+        <strong>Digital Cards</strong>
+      </div>
+      <div>© 2025 جميع الحقوق محفوظة</div>
+      <div style="font-size:.9rem">صُنع بحب 🤍</div>
     </div>
   </footer>
 
-  <!-- ============== SCRIPT ============== -->
+  <!-- ===== JSON-LD (Breadcrumbs / Brand) ===== -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Digital Cards",
+    "url":"https://digitalcards.sa",
+    "logo":"https://digitalcards.sa/assets/logo.png"
+  }
+  </script>
+
+  <!-- ===== Scripts ===== -->
   <script>
-    // Navbar scroll effect
-    window.addEventListener('scroll', function() {
-      const navbar = document.getElementById('navbar');
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mnav = document.getElementById('mnav');
+    menuBtn?.addEventListener('click', () => {
+      const open = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', String(!open));
+      mnav.hidden = open;
     });
 
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
+    // Pricing toggle
+    const tMonth = document.getElementById('m');
+    const tYear = document.getElementById('y');
+    const updateBilling = (yearly) => {
+      document.querySelectorAll('.v-year').forEach(el => el.hidden = !yearly);
+      document.querySelectorAll('.v-month').forEach(el => el.hidden = yearly);
+      tMonth.classList.toggle('active', !yearly);
+      tYear.classList.toggle('active', yearly);
+    };
+    tMonth?.addEventListener('click', () => updateBilling(false));
+    tYear?.addEventListener('click', () => updateBilling(true));
+
+    // Simple lead form (front-end only)
+    const form = document.getElementById('lead');
+    const note = document.getElementById('formNote');
+    document.getElementById('sendBtn')?.addEventListener('click', () => {
+      if (!form) return;
+      const fd = new FormData(form);
+      const name = (fd.get('name')||'').toString().trim();
+      const email = (fd.get('email')||'').toString().trim();
+      if(!name || !email){ note.textContent = 'فضلاً عبّئ الاسم والبريد.'; return; }
+      // TODO: اربط بنقطة نهاية backend (POST /api/lead)
+      note.textContent = 'تم استلام طلبك 👌 سنعود لك قريبًا.';
+      form.reset();
     });
+
+    // Scroll reveal (IntersectionObserver)
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.style.transform='translateY(0)'; e.target.style.opacity='1'; observer.unobserve(e.target); }
+      });
+    }, {threshold:.12});
+    document.querySelectorAll('.feature, .plan, .show-img, .showcase > div:first-child').forEach(el=>{
+      el.style.transform='translateY(20px)'; el.style.opacity='.001'; observer.observe(el);
+    });
+
+    // Navbar shadow on scroll
+    const nav = document.querySelector('.nav');
+    addEventListener('scroll', ()=> {
+      nav.style.boxShadow = (scrollY>10) ? '0 6px 20px rgba(0,0,0,.12)' : 'none';
+    }, {passive:true});
   </script>
 </body>
 </html>
